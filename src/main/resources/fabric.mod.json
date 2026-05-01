@@ -3,27 +3,23 @@
 	"id": "always-on-locator-bar",
 	"version": "${version}",
 	"name": "Always On Locator Bar",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Keeps the locator bar visible at all times even when while the XP bar is animating absorbed experience.",
 	"authors": [
-		"Me!"
+		"OrangoPontoTango"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/always-on-locator-bar",
+		"sources": "https://github.com/maker-lukas/always-on-locator-bar"
 	},
-	"license": "CC0-1.0",
+	"license": "AGPL-3.0-or-later",
 	"icon": "assets/always-on-locator-bar/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
-		"main": [
-			"com.orangopontotango.alwaysonlocatorbar.AlwaysOnLocatorBar"
-		],
 		"client": [
 			"com.orangopontotango.alwaysonlocatorbar.client.AlwaysOnLocatorBarClient"
 		]
 	},
 	"mixins": [
-		"always-on-locator-bar.mixins.json",
 		{
 			"config": "always-on-locator-bar.client.mixins.json",
 			"environment": "client"
