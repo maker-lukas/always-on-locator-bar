@@ -2,7 +2,9 @@
 	"required": true,
 	"package": "com.orangopontotango.alwaysonlocatorbar.client.mixin",
 	"compatibilityLevel": "JAVA_25",
-	"client": [],
+	"client": [
+		"GuiMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	},
