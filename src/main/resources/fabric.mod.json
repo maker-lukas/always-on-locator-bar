@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"client": [
 			"com.orangopontotango.alwaysonlocatorbar.client.AlwaysOnLocatorBarClient"
+		],
+		"modmenu": [
+			"com.orangopontotango.alwaysonlocatorbar.client.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

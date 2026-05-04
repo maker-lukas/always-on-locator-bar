@@ -1,5 +1,6 @@
 package com.orangopontotango.alwaysonlocatorbar.client.mixin;
 
+import com.orangopontotango.alwaysonlocatorbar.client.config.AlwaysOnLocatorBarConfig;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -14,6 +15,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import net.minecraft.client.gui.Font;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
@@ -25,6 +29,15 @@ public abstract class GuiMixin {
 
     @Unique
     private LocatorBarRenderer alwaysonlocatorbar$overlayLocator;
+
+    @Inject(method = "willPrioritizeExperienceInfo", at = @At("HEAD"), cancellable = true)
+    private void alwaysonlocatorbar$forceXpAlwaysVisible(CallbackInfoReturnable<Boolean> cir) {
+        AlwaysOnLocatorBarConfig config = AlwaysOnLocatorBarConfig.get();
+        if (config.enabled && config.xpBarAlwaysVisible) {
+            cir.setReturnValue(true);
+        }
+    }
+
 
     @Inject(
         method = "extractHotbarAndDecorations",
@@ -38,6 +51,7 @@ public abstract class GuiMixin {
             GuiGraphicsExtractor graphics,
             DeltaTracker deltaTracker,
             CallbackInfo ci) {
+        if (!AlwaysOnLocatorBarConfig.get().enabled) return;        
         if (this.minecraft.player == null) return;
         if (this.contextualInfoBar.getValue() instanceof LocatorBarRenderer) return;
         if (!this.minecraft.player.connection.getWaypointManager().hasWaypoints()) return;
