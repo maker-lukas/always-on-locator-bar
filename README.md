@@ -6,7 +6,7 @@ In vanilla, picking up XP orbs hides your locator bar for a few seconds: annoyin
 
 ## Video DEMO
 
-![video](https://www.youtube.com/watch?v=_JZ3edkz2wk)
+https://www.youtube.com/watch?v=_JZ3edkz2wk
 
 ## Screenshots
 
