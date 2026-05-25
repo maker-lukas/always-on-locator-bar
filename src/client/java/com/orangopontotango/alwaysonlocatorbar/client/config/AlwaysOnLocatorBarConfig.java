@@ -1,34 +1,55 @@
 package com.orangopontotango.alwaysonlocatorbar.client.config;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.orangopontotango.alwaysonlocatorbar.client.AlwaysOnLocatorBarClient;
-import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
-import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resources.Identifier;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class AlwaysOnLocatorBarConfig {
-    public static final ConfigClassHandler<AlwaysOnLocatorBarConfig> HANDLER =
-        ConfigClassHandler.createBuilder(AlwaysOnLocatorBarConfig.class)
-            .id(Identifier.fromNamespaceAndPath(AlwaysOnLocatorBarClient.MOD_ID, "config"))
-            .serializer(config -> GsonConfigSerializerBuilder.create(config)
-                .setPath(FabricLoader.getInstance().getConfigDir()
-                    .resolve(AlwaysOnLocatorBarClient.MOD_ID + ".json"))
-                .setJson5(false)
-                .build())
-            .build();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir()
+        .resolve(AlwaysOnLocatorBarClient.MOD_ID + ".json");
 
-    @SerialEntry(comment = "Master Toggle. When false, the mod does nothing, vannial behaviour.")
+    private static AlwaysOnLocatorBarConfig instance = new AlwaysOnLocatorBarConfig();
+
+    /** Master toggle. When false, the mod does nothing (vanilla behaviour). */
     public boolean enabled = true;
 
-    @SerialEntry(comment = "If true, force the XP bar to always be visible (with locator dots overlayed).")
+    /** If true, force the XP bar to always be visible (with locator dots overlayed). */
     public boolean xpBarAlwaysVisible = false;
 
     public static AlwaysOnLocatorBarConfig get() {
-        return HANDLER.instance();
+        return instance;
     }
 
     public static void load() {
-        HANDLER.load();
+        if (!Files.exists(CONFIG_PATH)) {
+            save();
+            return;
+        }
+        try (var reader = Files.newBufferedReader(CONFIG_PATH)) {
+            AlwaysOnLocatorBarConfig loaded = GSON.fromJson(reader, AlwaysOnLocatorBarConfig.class);
+            if (loaded != null) {
+                instance = loaded;
+            }
+        } catch (IOException | JsonParseException e) {
+            AlwaysOnLocatorBarClient.LOGGER.warn("Failed to load config, using defaults", e);
+        }
+    }
+
+    public static void save() {
+        try {
+            Files.createDirectories(CONFIG_PATH.getParent());
+            try (var writer = Files.newBufferedWriter(CONFIG_PATH)) {
+                GSON.toJson(instance, writer);
+            }
+        } catch (IOException e) {
+            AlwaysOnLocatorBarClient.LOGGER.warn("Failed to save config", e);
+        }
     }
 }

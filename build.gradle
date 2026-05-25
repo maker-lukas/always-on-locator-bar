@@ -34,7 +34,6 @@ dependencies {
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
 	implementation "maven.modrinth:modmenu:18.0.0-alpha.8"
-	implementation "maven.modrinth:yacl:3.9.3+26.1-fabric"	
 }
 
 processResources {

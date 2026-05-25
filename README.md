@@ -4,6 +4,10 @@ A small client-side Fabric mod for Minecraft **26.1.2** that stops the locator b
 
 In vanilla, picking up XP orbs hides your locator bar for a few seconds: annoying when you're trying to follow a waypoint. This mod overlays the locator dots on top of the XP bar so your waypoints stay visible at all times.
 
+## Video DEMO
+
+![video](https://www.youtube.com/watch?v=_JZ3edkz2wk)
+
 ## Screenshots
 
 | Locator bar (vanilla state) | Locator dots overlayed on XP bar |
@@ -29,14 +33,14 @@ In vanilla, picking up XP orbs hides your locator bar for a few seconds: annoyin
 
 ## Optional
 
-- [Mod Menu](https://modrinth.com/mod/modmenu) + [YACL](https://modrinth.com/mod/yacl): needed to open the in-game config screen.
+- [Mod Menu](https://modrinth.com/mod/modmenu): needed to open the in-game config screen.
 
 ## Install
 
 1. Install [Fabric Loader](https://fabricmc.net/use/) for 26.1.2.
 2. Drop [Fabric API](https://modrinth.com/mod/fabric-api) into your `mods/` folder.
 3. Drop the `always-on-locator-bar` jar into `mods/`.
-4. (Optional) Add Mod Menu + YACL for config UI.
+4. (Optional) Add Mod Menu for the in-game config UI.
 
 ## Build from source
 

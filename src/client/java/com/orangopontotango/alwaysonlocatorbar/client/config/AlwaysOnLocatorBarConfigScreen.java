@@ -47,7 +47,7 @@ public final class AlwaysOnLocatorBarConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        AlwaysOnLocatorBarConfig.HANDLER.save();
+        AlwaysOnLocatorBarConfig.save();
         this.minecraft.setScreen(this.parent);
     }
 

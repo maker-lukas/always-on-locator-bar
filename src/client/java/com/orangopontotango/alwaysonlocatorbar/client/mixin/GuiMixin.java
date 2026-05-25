@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
-import net.minecraft.client.gui.Font;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {

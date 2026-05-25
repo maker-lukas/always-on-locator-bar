@@ -3,7 +3,7 @@
 	"id": "always-on-locator-bar",
 	"version": "${version}",
 	"name": "Always On Locator Bar",
-	"description": "Keeps the locator bar visible at all times even when while the XP bar is animating absorbed experience.",
+	"description": "Keeps the locator bar visible at all times even while the XP bar is animating absorbed experience.",
 	"authors": [
 		"OrangoPontoTango"
 	],
